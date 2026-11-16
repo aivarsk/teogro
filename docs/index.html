@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f7f5">
+  <title>Teogro - Python &amp; Django development, servers, data</title>
+  <meta name="description" content="Python and Django development, Linux server administration, data collection and analysis, and device prototyping. 20+ years of payment systems engineering.">
+  <link rel="canonical" href="https://teogro.com/">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Teogro">
+  <meta property="og:url" content="https://teogro.com/">
+  <meta property="og:title" content="Teogro - Python &amp; Django development">
+  <meta property="og:description" content="Python and Django development, Linux server administration, data collection and analysis, and device prototyping. 20+ years of payment systems engineering.">
+  <meta property="og:image" content="https://teogro.com/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Teogro - Python and Django development, servers, data, devices">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Teogro - Python &amp; Django development">
+  <meta name="twitter:description" content="Python and Django development, Linux server administration, data collection and analysis, and device prototyping. 20+ years of payment systems engineering.">
+  <meta name="twitter:image" content="https://teogro.com/og.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Teogro",
+    "legalName": "Teogro OÜ",
+    "url": "https://teogro.com/",
+    "email": "hello@teogro.com",
+    "foundingDate": "2022",
+    "taxID": "16458965",
+    "vatID": "EE102742538",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Tornimäe tn 3 // 5 // 7",
+      "addressLocality": "Tallinn",
+      "addressRegion": "Harju maakond",
+      "postalCode": "10145",
+      "addressCountry": "EE"
+    },
+    "sameAs": ["https://aivarsk.com"]
+  }
+  </script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23177245'/%3E%3Ctext x='32' y='45' font-family='monospace' font-size='40' fill='%23ffffff' text-anchor='middle'%3Et%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #f6f7f5;
+      --surface: #ffffff;
+      --ink: #1d211d;
+      --muted: #5a615a;
+      --accent: #177245;
+      --accent-dark: #0e5533;
+      --accent-tint: rgba(23, 114, 69, .09);
+      --line: #e2e5e0;
+      --radius: 10px;
+      --sans: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.65;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    .wrap { max-width: 66rem; margin: 0 auto; padding: 0 1.25rem; }
+
+    a { color: var(--accent); }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+    address { font-style: normal; }
+
+    .legal-list { margin: 0; max-width: 50rem; }
+    .legal-list div {
+      display: flex;
+      gap: 1rem;
+      padding: .55rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .legal-list div:last-child { border-bottom: 0; }
+    .legal-list dt { flex: 0 0 12rem; color: var(--muted); font-size: .93rem; }
+    .legal-list dd { margin: 0; }
+    @media (max-width: 640px) {
+      .legal-list div { flex-direction: column; gap: .1rem; }
+    }
+
+    /* Header */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(246, 247, 245, .88);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    .site-header .wrap {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      height: 4rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -.01em;
+    }
+    .logo svg { border-radius: 6px; }
+    .site-nav {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+    }
+    .site-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .95rem;
+    }
+    .site-nav a:hover { color: var(--ink); }
+    .site-nav .nav-cta {
+      background: var(--accent);
+      color: #fff;
+      padding: .5rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .site-nav .nav-cta:hover { background: var(--accent-dark); color: #fff; }
+    @media (max-width: 640px) {
+      .site-nav a:not(.nav-cta) { display: none; }
+    }
+
+    /* Hero */
+
+    .hero { padding: 5.5rem 0 4rem; max-width: 46rem; }
+    .eyebrow {
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 1rem;
+    }
+    h1 {
+      font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      margin: 0 0 1.1rem;
+    }
+    .hero p.lead { font-size: 1.12rem; color: var(--muted); margin: 0 0 1.8rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; }
+    .btn {
+      display: inline-block;
+      padding: .75rem 1.4rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-dark); }
+    .btn-ghost { border-color: var(--line); color: var(--ink); background: var(--surface); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Sections */
+
+    section { padding: 3.5rem 0; }
+    h2 { font-size: 1.6rem; letter-spacing: -.01em; margin: 0 0 .5rem; }
+    .section-sub { color: var(--muted); margin: 0 0 2rem; max-width: 42rem; }
+
+    /* Service cards */
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+    @media (min-width: 720px) {
+      .cards { grid-template-columns: repeat(2, 1fr); }
+    }
+    .card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .card .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.6rem;
+      height: 2.6rem;
+      border-radius: 8px;
+      background: var(--accent-tint);
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .card h3 { margin: 0 0 .5rem; font-size: 1.12rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .97rem; }
+    .tag {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-tint);
+      padding: .25rem .6rem;
+      border-radius: 99px;
+    }
+
+    /* Experience */
+
+    .experience { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .checklist { list-style: none; margin: 0 0 1.5rem; padding: 0; max-width: 50rem; }
+    .checklist li {
+      display: flex;
+      gap: .8rem;
+      padding: .8rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .checklist li:last-child { border-bottom: 0; }
+    .checklist svg { flex: none; color: var(--accent); margin-top: .3rem; }
+    .checklist strong { display: block; margin-bottom: .15rem; }
+    .checklist span { color: var(--muted); font-size: .97rem; }
+
+    /* Contact band */
+
+    .contact {
+      background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+      color: #fff;
+      text-align: center;
+      padding: 4rem 0;
+    }
+    .contact h2 { color: #fff; }
+    .contact p { color: rgba(255, 255, 255, .85); max-width: 34rem; margin: 0 auto 1.6rem; }
+    .contact .btn { background: #fff; color: var(--accent-dark); }
+    .contact .btn:hover { background: #eef3ef; }
+
+    /* Footer */
+
+    footer { padding: 2rem 0 2.5rem; color: var(--muted); font-size: .9rem; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; align-items: center; }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--accent); }
+    footer .spacer { margin-left: auto; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="/" aria-label="Teogro home">
+        <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="12" fill="#177245"/><text x="32" y="45" font-family="monospace" font-size="40" fill="#fff" text-anchor="middle">t</text></svg>
+        teogro
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="#services">Services</a>
+        <a href="#experience">Experience</a>
+        <a href="#legal">Legal</a>
+        <a class="nav-cta" href="mailto:hello@teogro.com">hello@teogro.com</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="wrap">
+      <div class="hero">
+        <p class="eyebrow">Teogro O&Uuml; &middot; Software company, Estonia</p>
+        <h1>Python and Django development, backed by two decades of payment systems engineering.</h1>
+        <p class="lead">We build web applications, data pipelines, and the servers they run on. The habits that keep bank ledgers correct under failure go into every project: correctness first, measured performance, boring operations.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="mailto:hello@teogro.com">Start a project</a>
+          <a class="btn btn-ghost" href="https://aivarsk.com">Engineering background &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <section id="services" class="wrap" aria-labelledby="services-h">
+      <h2 id="services-h">Services</h2>
+      <p class="section-sub">Five things we do. One of them most of the time.</p>
+
+      <div class="cards">
+        <div class="card">
+          <span class="tag">Core service</span>
+          <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg></span>
+          <h3>Python &amp; Django development</h3>
+          <p>Web applications, REST APIs, and internal tools with Python, Django, and PostgreSQL or SQLite. Anything from a single CRUD form to a full back office with imports, reports, and role-based access. Upgrades and rescue work on existing Django codebases welcome. Python is the preferred stack, not the only one: development and maintenance in C, C++, Java, Go, and PHP as well.</p>
+        </div>
+
+        <div class="card">
+          <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></span>
+          <h3>Training</h3>
+          <p>Oracle Tuxedo training for developers and administrators, based on the Packt book <em>Modernizing Oracle Tuxedo Applications with Python</em>. A TigerBeetle course is in preparation.</p>
+        </div>
+
+        <div class="card">
+          <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg></span>
+          <h3>Server administration</h3>
+          <p>Linux servers set up and maintained: hardening, updates, backups, and someone to call when a disk fills up. Every server we run is watched by <a href="https://microsre.io">microsre.io</a>, our own local-first monitoring tool. Docker and Kubernetes when the project calls for them, a plain well-kept VPS when it does not.</p>
+        </div>
+
+        <div class="card">
+          <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></span>
+          <h3>Data collection &amp; analysis</h3>
+          <p>Public web data gathered on a schedule, cleaned, and delivered as a database, spreadsheet, report, or API. Prices, public registries, competitor pages: collected and kept fresh without anyone clicking around.</p>
+        </div>
+
+        <div class="card">
+          <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></span>
+          <h3>3D printing &amp; prototyping</h3>
+          <p>A workshop running several 3D printers, including a custom machine we designed and built ourselves. Custom weather stations, small toys, and branded merchandise for organizations: keychains, tags, and similar giveaway items. Devices designed, printed, and programmed to do one job and report back to your systems.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="experience" aria-labelledby="experience-h">
+      <div class="wrap">
+        <h2 id="experience-h">The engineering behind Teogro</h2>
+        <p class="section-sub">Teogro is a small company, and the work behind it is not. Two decades of building systems where a rounding error is a bug and a duplicate transfer is an incident.</p>
+
+        <ul class="checklist">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><strong>Payment and ledger systems</strong><span>Card issuing and authorization, SEPA and SWIFT payments, ISO 20022 migration, 3-D Secure, PCI-DSS compliance.</span></div>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><strong>Legacy modernization</strong><span>Incremental migration of Oracle Tuxedo estates to modern stacks. Author of the Packt book <em>Modernizing Oracle Tuxedo Applications with Python</em>.</span></div>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><strong>Performance and incidents</strong><span>Root cause analysis that goes all the way down: kernel crashes traced to a buggy backup software kernel module, slow virtual machines explained by a host and guest filesystem mismatch, PostgreSQL and application code performance. One such story became the conference talk <a href="https://www.youtube.com/watch?v=lYZHDP0j1Qw">How to Solve a Python Mystery</a>.</span></div>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><strong>Open source</strong><span>Contributions to Python 3.12 and Django 5.1, plus published projects on GitHub.</span></div>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><strong>Conference speaking</strong><span>SREcon26 EMEA on hidden process state in procfs, DjangoCon Europe, PyCon Austria, PostgreSQL Conference Europe. Full list at <a href="https://aivarsk.com/speaking">aivarsk.com/speaking</a>.</span></div>
+          </li>
+        </ul>
+
+        <p>Writing, conference talks, and open source live at <a href="https://aivarsk.com">aivarsk.com</a>.</p>
+      </div>
+    </section>
+
+    <section id="legal" class="wrap" aria-labelledby="legal-h">
+      <h2 id="legal-h">Legal</h2>
+      <p class="section-sub">Everything needed for contracts and invoices.</p>
+      <dl class="legal-list">
+        <div><dt>Legal name</dt><dd>Teogro O&Uuml;</dd></div>
+        <div><dt>Registry code</dt><dd>16458965</dd></div>
+        <div><dt>VAT number</dt><dd>EE102742538</dd></div>
+        <div><dt>Address</dt><dd><address>Harju maakond, Tallinn, Kesklinna linnaosa, Tornim&auml;e tn 3 // 5 // 7, 10145, Estonia</address></dd></div>
+        <div><dt>Field of activity</dt><dd>Computer programming, consulting and other IT service activities (EMTAK 62201, computer consultancy activities)</dd></div>
+        <div><dt>Share capital</dt><dd>2 500 EUR</dd></div>
+        <div><dt>Bank</dt><dd>Wise, Rue du Tr&ocirc;ne 100, 3rd floor, Brussels, 1050, Belgium</dd></div>
+        <div><dt>IBAN</dt><dd>BE07967273889566</dd></div>
+        <div><dt>SWIFT/BIC</dt><dd>TRWIBEB1XXX</dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:hello@teogro.com">hello@teogro.com</a></dd></div>
+      </dl>
+    </section>
+
+    <section id="contact" class="contact" aria-labelledby="contact-h">
+      <div class="wrap">
+        <h2 id="contact-h">Tell us about the project</h2>
+        <p>A few sentences about the problem are enough to start. If it looks like a fit, we reply with questions and a rough plan.</p>
+        <a class="btn" href="mailto:hello@teogro.com">hello@teogro.com</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>&copy; 2026 Teogro O&Uuml;</span>
+      <a href="mailto:hello@teogro.com" rel="nofollow">hello@teogro.com</a>
+      <a href="https://aivarsk.com" rel="nofollow">aivarsk.com</a>
+      <span class="spacer"></span>
+      <span>Registry code 16458965 &middot; VAT EE102742538</span>
+    </div>
+  </footer>
+
+</body>
+</html>
